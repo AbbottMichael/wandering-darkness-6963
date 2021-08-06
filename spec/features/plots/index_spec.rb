@@ -50,5 +50,11 @@ RSpec.describe 'The Plot index page' do
         expect(page).to_not have_link("Remove #{@plant2.name}")
       end
     end
+
+    it "when 'Remove <plant.name>' is clicked, the plant is no longer listed under the Plot" do
+      click_on("Remove #{@plant1.name}")
+      expect(current_path).to eq(plots_path)
+      expect(page).to_not have_content(@plant1.name)
+    end
   end
 end
