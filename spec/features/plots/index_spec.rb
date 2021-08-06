@@ -37,21 +37,17 @@ RSpec.describe 'The Plot index page' do
 
   describe 'User Story 2, Remove a Plant from a Plot' do
     it "displays, next to each plant's name, a link to remove the plant" do
-      within "#plant-#{@plant1.id}" do
+      within "#plot-#{@plot1.id}" do
         expect(page).to have_link("Remove #{@plant1.name}")
-        expect(page).to_not have_link("Remove #{@plant2.name}")
-      end
-      within "#plant-#{@plant2.id}" do
         expect(page).to have_link("Remove #{@plant2.name}")
         expect(page).to_not have_link("Remove #{@plant3.name}")
-      end
-      within "#plant-#{@plant3.id}" do
-        expect(page).to have_link("Remove #{@plant3.name}")
         expect(page).to_not have_link("Remove #{@plant4.name}")
       end
-      within "#plant-#{@plant4.id}" do
+      within "#plot-#{@plot2.id}" do
+        expect(page).to have_link("Remove #{@plant3.name}")
         expect(page).to have_link("Remove #{@plant4.name}")
-        expect(page).to_not have_link("Remove #{@plant3.name}")
+        expect(page).to_not have_link("Remove #{@plant1.name}")
+        expect(page).to_not have_link("Remove #{@plant2.name}")
       end
     end
   end
