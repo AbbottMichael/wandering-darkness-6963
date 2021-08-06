@@ -19,6 +19,19 @@ RSpec.describe 'The Plot index page' do
       expect(page).to have_content(@plot2.number)
     end
 
-    it "displays the names of all of that plot's plants under it's plot number"
+    it "displays the names of all of that plot's plants under it's plot number" do
+      within "#plot-#{@plot1.id}" do
+        expect(page).to have_content(@plant1.name)
+        expect(page).to have_content(@plant2.name)
+        expect(page).to_not have_content(@plant3.name)
+        expect(page).to_not have_content(@plant4.name)
+      end
+      within "#plot-#{@plot2.id}" do
+        expect(page).to have_content(@plant3.name)
+        expect(page).to have_content(@plant4.name)
+        expect(page).to_not have_content(@plant1.name)
+        expect(page).to_not have_content(@plant2.name)
+      end
+    end
   end
 end
