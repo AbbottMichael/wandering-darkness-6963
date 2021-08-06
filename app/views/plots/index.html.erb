@@ -5,7 +5,7 @@
     <p>Plot number: <%= plot.number %></p>
       <ol>
         <% plot.plants.each do |plant| %>
-          <li> <%= plant.name %> <%= link_to "Remove #{plant.name}", plots_path %> </li>
+          <li> <%= plant.name %> <%= link_to "Remove #{plant.name}", plot_plant_path(@plot_path.find_plot_plant(plant.id, plot.id).id), method: 'delete', local: true %> </li>
         <% end %>
       </ol>
   </div>
