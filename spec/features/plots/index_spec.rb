@@ -10,7 +10,7 @@ RSpec.describe 'The Plot index page' do
     @plant3 = @plot2.plants.create!(name: 'Plant3', description: 'Description3', days_to_harvest: 50)
     @plant4 = @plot2.plants.create!(name: 'Plant4', description: 'Description4', days_to_harvest: 100)
 
-    visit '/plots'
+    visit plots_path
   end
 
   describe 'User story 1, Plots Index Page' do
@@ -31,6 +31,27 @@ RSpec.describe 'The Plot index page' do
         expect(page).to have_content(@plant4.name)
         expect(page).to_not have_content(@plant1.name)
         expect(page).to_not have_content(@plant2.name)
+      end
+    end
+  end
+
+  describe 'User Story 2, Remove a Plant from a Plot' do
+    it "displays, next to each plant's name, a link to remove the plant" do
+      within "#plant-#{@plant1.id}" do
+        expect(page).to have_link("Remove #{@plant1.name}")
+        expect(page).to_not have_link("Remove #{@plant2.name}")
+      end
+      within "#plant-#{@plant2.id}" do
+        expect(page).to have_link("Remove #{@plant2.name}")
+        expect(page).to_not have_link("Remove #{@plant3.name}")
+      end
+      within "#plant-#{@plant3.id}" do
+        expect(page).to have_link("Remove #{@plant3.name}")
+        expect(page).to_not have_link("Remove #{@plant4.name}")
+      end
+      within "#plant-#{@plant4.id}" do
+        expect(page).to have_link("Remove #{@plant4.name}")
+        expect(page).to_not have_link("Remove #{@plant3.name}")
       end
     end
   end
